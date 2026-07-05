@@ -141,6 +141,8 @@ promedioCalificaciones("8,9,10,7") // "8.50"
 ---
 
 ## 🖼️ Capturas de pantalla
+<img width="1366" height="725" alt="log1" src="https://github.com/user-attachments/assets/8d50a4ab-0f09-4567-a469-06a233293f90" />
+<img width="1366" height="724" alt="log2" src="https://github.com/user-attachments/assets/83a6147d-9983-4441-ae5a-041ebd5ea73c" />
 
 ---
 
