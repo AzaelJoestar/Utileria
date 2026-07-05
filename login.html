@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <img src="img/logo.png" width="100">
+
+<h1>Login</h1>
+
+<form id="loginForm">
+
+<label>ID</label>
+<input type="text" id="id" readonly>
+
+<label>Nombre</label>
+<input type="text" id="nombre">
+
+<label>Correo</label>
+<input type="email" id="correo">
+
+<label>Teléfono</label>
+<input type="text" id="telefono">
+
+<label>Fecha de nacimiento</label>
+<input type="date" id="fecha">
+<p id="edadCalculada"></p>
+
+<label>Contraseña</label>
+<input type="password" id="password">
+<div id="mensajePassword"></div>
+
+<button type="submit">Ingresar</button>
+
+</form>
+
+<script src="js/utileria.js"></script>
+<script>
+
+document.getElementById("id").value = generarId()
+
+let passwordInput = document.getElementById("password")
+let mensaje = document.getElementById("mensajePassword")
+
+passwordInput.addEventListener("input",function(){
+let pass = passwordInput.value
+let errores = []
+
+if(!/[A-Z]/.test(pass)) errores.push("Falta mayúscula")
+if(!/[a-z]/.test(pass)) errores.push("Falta minúscula")
+if(!/\d/.test(pass)) errores.push("Falta número")
+if(!/[\W_]/.test(pass)) errores.push("Falta carácter especial")
+if(pass.length < 8) errores.push("Mínimo 8 caracteres")
+
+if(errores.length > 0){
+mensaje.innerHTML = errores.join("<br>")
+mensaje.style.color = "red"
+}else{
+mensaje.innerHTML = "Contraseña válida"
+mensaje.style.color = "green"
+}
+})
+
+let fechaInput = document.getElementById("fecha")
+let edadTexto = document.getElementById("edadCalculada")
+
+fechaInput.addEventListener("change",function(){
+let edad = calcularEdad(fechaInput.value)
+edadTexto.innerText = "Edad: " + edad
+
+if(edad >= 18){
+edadTexto.style.color = "green"
+}else{
+edadTexto.style.color = "red"
+}
+})
+
+document.getElementById("loginForm").addEventListener("submit",function(e){
+e.preventDefault()
+
+let nombre = document.getElementById("nombre").value
+let correo = document.getElementById("correo").value
+let telefono = document.getElementById("telefono").value
+let fecha = document.getElementById("fecha").value
+let password = document.getElementById("password").value
+
+if(!soloLetras(nombre)){alert("Nombre inválido");return}
+if(!validarCorreo(correo)){alert("Correo inválido");return}
+if(!/^\d+$/.test(telefono) || !validarLongitud(telefono,10)){alert("Teléfono inválido");return}
+if(!validarPassword(password)){alert("Password inválido");return}
+if(!esMayorDeEdad(fecha)){alert("Debe ser mayor de edad");return}
+
+alert("Login correcto")
+
+})
+
+</script>
+
+<img src="img/doom.png" width="100">
+</body>
+</html>
